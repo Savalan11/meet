@@ -1,60 +1,36 @@
-import React, { Component } from "react";
-class NumberOfEvents extends Component {
-  state = {
-    eventsNumber: 32,
-  };
+//src/NumberOfEvents.js
 
-  inputChanged = (event) => {
-    //if no number is set, numberValue is set to 32 by default
-    const numberValue = event.target.value;
-    if (numberValue <= 0 && typeof numberValue === "number") {
-      this.setState({
-        errorText: "Please enter a positive number to view at least one event!",
-        eventsNumber: numberValue,
-        warningText: null,
-      });
-    } else if (numberValue > this.props.totalResNumber) {
-      this.setState({
-        eventsNumber: this.props.totalResNumber,
-        errorText: null,
-        warningText: `Oh no! There's only ${this.props.totalResNumber} events in this category!`,
-      });
-    } else if (numberValue > 0) {
-      this.setState({
-        eventsNumber: numberValue,
-        warningText: null,
-        errorText: null,
-      });
-    }
-    this.props.updateEvents(undefined, numberValue);
+import React, { Component } from "react";
+
+class NumberOfEvents extends Component {
+  constructor() {
+    super();
+    // stting the values for the default states
+    this.state = {
+      numberOfEvents: 32,
+    };
+  }
+
+  updateNumberOfEvents = (event) => {
+    this.setState({
+      numberOfEvents: event.target.value,
+    });
+    this.props.updateEventNumbers(event.target.value);
   };
 
   render() {
-    const { events, updateEvents, totalResNumber } = this.props;
     return (
-      <div className="eventsNumber">
-        {this.state.errorText && <>
-          {/* <ErrorAlert text={this.state.errorText} /> */}
-          {this.state.errorText}
-        </>}
-        {this.state.warningText && (
-          <>
-            {/* <WarningAlert text={this.state.warningText} /> */}
-            <span>{this.state.warningText}</span>
-          </>
-        )}
-
-        <label>Show</label>
+      <div className="numberOfEvents">
+        <label className="numberOfEvents__lable">Number of Events</label>
         <input
           type="number"
-          className="edit-number"
-          placeholder={this.state.eventsNumber}
-          onChange={this.inputChanged}
+          className="numberOfEvents__input"
+          value={this.state.numberOfEvents}
+          onChange={this.updateNumberOfEvents}
         ></input>
-        <label>Events</label>
       </div>
     );
   }
 }
-export default NumberOfEvents;
 
+export default NumberOfEvents;

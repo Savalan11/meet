@@ -1,40 +1,45 @@
-import React, { Component } from 'react';
-import { mockData } from './mock-data';
+// src/Event.js
+
+import React, { Component } from "react";
 
 class Event extends Component {
-  state = {
-    collapsed: true,
-  };
+  constructor(props) {
+    super(props);
+    // stting the values for the default states
+    this.state = {
+      collapsed: true,
+      detailsButtonText: "More Details",
+    };
+  }
 
-  handleClick = () => {
-    this.state.collapsed
-      ? this.setState({ collapsed: false })
-      : this.setState({ collapsed: true });
-  };
-
-  showSummary = () => {
-    if (this.state.collapsed === false) {
-      return mockData[0].description;
-    }
-  };
-
-  dateNewFormat = (eventDate) => {
-    const newDate = `${new Date(eventDate)}`;
-    return newDate;
+  // definding the event handler for the show/hide Details Button
+  eventDetails = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+      detailsButtonText: this.state.collapsed ? "Less Details" : "More Details",
+    });
   };
 
   render() {
     const { event } = this.props;
-
     return (
       <div className="event">
-        <h3 className="title">{event.summary}</h3>
-        <p className="start-time">{this.dateNewFormat(event.start.dateTime)}</p>
-        <p className="location">{event.location}</p>
-        <button className="btn-details" onClick={this.handleClick}>
-          show details
+        {/* the by defauld showen informaiton */}
+        <h1 className="event__summary">{event.summary}</h1>
+        <p className="event__start">{event.start.dateTime}</p>
+        <p className="event__timeZone">{event.start.timeZone}</p>
+        {/* the collapsed information */}
+        {!this.state.collapsed && (
+          <div className="event__moreDetails">
+            <p className="event__end">{event.end.dateTime}</p>
+            <p className="event__description">{event.description}</p>
+            <p className="event__location">{event.location}</p>
+            <p className="event__calendarLink">{event.htmlLink}</p>
+          </div>
+        )}
+        <button className="event__detailsButton details-btn" onClick={() => this.eventDetails()}>
+          {this.state.detailsButtonText}
         </button>
-        <p className="event-details">{this.showSummary()}</p>
       </div>
     );
   }

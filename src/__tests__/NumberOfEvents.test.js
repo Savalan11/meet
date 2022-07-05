@@ -1,43 +1,34 @@
+//__test__/NumberOfEvents.test.js
+
 import React from "react";
 import { shallow } from "enzyme";
 import NumberOfEvents from "../NumberOfEvents";
-import { mockData } from "../mock-data";
 
 describe("<NumberOfEvents /> component", () => {
   let NumberOfEventsWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(
-      <NumberOfEvents eNumber={mockData.length} updateEvents={() => {}} />
-    );
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEventNumbers={() => {}} />);
   });
 
-  test("render number of events container div", () => {
-    expect(NumberOfEventsWrapper.find("div.eventsNumber")).toHaveLength(1);
+  test("render number of events", () => {
+    expect(NumberOfEventsWrapper.find(".numberOfEvents")).toHaveLength(1);
   });
 
-  test("renders input labels", () => {
-    expect(NumberOfEventsWrapper.find("label")).toHaveLength(2);
+  test("render lable for numberOfEvents", () => {
+    expect(NumberOfEventsWrapper.find(".numberOfEvents__lable")).toHaveLength(1);
   });
 
-  test("renders input box", () => {
-    expect(NumberOfEventsWrapper.find("input.edit-number")).toHaveLength(1);
+  test("render input for numberOfEvents", () => {
+    expect(NumberOfEventsWrapper.find(".numberOfEvents__input")).toHaveLength(1);
   });
 
-  //input number is equal to the default state of 32
-  test("renders input number correctly", () => {
-    //const eventsNumber = NumberOfEventsWrapper.state("eventsNumber");
-    expect(NumberOfEventsWrapper.find("input.edit-number")).toHaveLength(1);
+  test("render number of events 32 by default", () => {
+    expect(NumberOfEventsWrapper.state("numberOfEvents")).toBe(32);
   });
 
-  //tests if the input number updates the state after being altered
-  test("change state when text input changes", () => {
-    NumberOfEventsWrapper.setState({
-      eventsNumber: "2",
-    });
-    NumberOfEventsWrapper.find("input.edit-number").simulate("change", {
-      target: { value: "3" },
-    });
-    expect(NumberOfEventsWrapper.state("eventsNumber")).not.toEqual(undefined);
-    expect(NumberOfEventsWrapper.state("eventsNumber")).toBe("3");
+  test("changed number of Event state, when input number is changed by user", () => {
+    const eventObject = { target: { value: 16 } };
+    NumberOfEventsWrapper.find(".numberOfEvents__input").simulate("change", eventObject);
+    expect(NumberOfEventsWrapper.state("numberOfEvents")).toBe(16);
   });
 });
