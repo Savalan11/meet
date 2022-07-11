@@ -23,7 +23,7 @@ defineFeature(feature, (test) => {
     });
 
     then("the default number of displayed events will be 32 (2 with local test) at once", () => {
-      expect(AppWrapper.find(".event")).toHaveLength(2);
+      expect(AppWrapper.find(".event")).toHaveLength(6);
     });
   });
 

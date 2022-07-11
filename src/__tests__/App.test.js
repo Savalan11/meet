@@ -95,8 +95,8 @@ describe("<App /> integration", () => {
     await getEvents();
     AppWrapper.update();
     const EventListWrapper = AppWrapper.find(EventList);
-    expect(AppWrapper.state("events")).toHaveLength(2);
-    expect(EventListWrapper.props().events).toHaveLength(2);
+    expect(AppWrapper.state("events")).toHaveLength(5);
+    expect(EventListWrapper.props().events).toHaveLength(5);
     AppWrapper.unmount();
   });
 
