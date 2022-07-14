@@ -16,7 +16,7 @@ defineFeature(feature, (test) => {
     });
 
     when("an event is displayed", () => {
-      expect(AppWrapper.find(".event__detailsButton")).toHaveLength(2);
+      expect(AppWrapper.find(".event__detailsButton")).toHaveLength(6);
     });
 
     then("the event details will be collapsed.", () => {
@@ -33,7 +33,7 @@ defineFeature(feature, (test) => {
 
     when("the user clicks on an individual event", () => {
       AppWrapper.update();
-      expect(AppWrapper.find(".event__detailsButton")).toHaveLength(2);
+      expect(AppWrapper.find(".event__detailsButton")).toHaveLength(6);
       AppWrapper.find(".event__detailsButton").at(0).simulate("click");
     });
 

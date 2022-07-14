@@ -75,6 +75,7 @@ class App extends Component {
         <NumberOfEvents
           updateEvents={this.updateEvents}
           numberOfEvents={numberOfEvents}
+          updateEventNumbers={this.updateEventNumbers}
         />       
          <h4>Events in each city</h4>
 
