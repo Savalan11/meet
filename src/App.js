@@ -3,6 +3,7 @@ import EventList from "./EventList";
 import NumberOfEvents from "./NumberOfEvents";
 import CitySearch from "./CitySearch";
 import { getEvents, extractLocations } from "./api";
+import EventGenre from "./EventGenre";
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
